@@ -1,0 +1,1 @@
+// server list (can be dynamic later)
