@@ -10,12 +10,13 @@ This repository contains **real-world backend architecture implementations** for
 
 ## 🚀 Modules
 
-### ✅ Load Balancer (Phase 1 - Basic)
+### ✅ Load Balancer (Phase 2 - Redis Pub/Sub Integrated)
 
 - 🌐 Round-robin routing
-- ⚙️ Health check engine
-- 🔄 Dynamic failover if a server goes down
-- 📦 Manual server list with in-memory config
+- ⚙️ Health check engine (Orchestrator)
+- 🔄 Dynamic failover using Redis Pub/Sub
+- 🔁 Real-time server state updates
+- 📦 Config decoupled from code (via Redis)
 
 ---
 
@@ -42,7 +43,7 @@ cd high-level-system-design-backend
 
 ### 2. Install dependencies
 ```bash
-npm install express axios
+npm install express axios redis
 ```
 
 ### 3. Run all services
@@ -71,7 +72,8 @@ Hello from Server 3
 ...
 ```
 
-When a server is down, it is automatically skipped.
+When a server is down, orchestrator detects it and updates Redis.
+Load balancer receives update in real-time and skips the dead server automatically.
 
 ---
 
@@ -92,7 +94,7 @@ When a server is down, it is automatically skipped.
 - Node.js
 - Express.js
 - Axios
-- Redis (upcoming)
+- Redis (used for Pub/Sub)
 - ❤️ Hands-on system design mindset
 
 ---
